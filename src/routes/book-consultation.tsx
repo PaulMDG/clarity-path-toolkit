@@ -49,13 +49,13 @@ function Book() {
   }, [search.success]);
 
   const selected = types?.find((t) => t.id === selectedId);
+  const startCheckout = useServerFn(createCheckoutSession);
 
   async function handleContinue() {
     const parsed = detailsSchema.safeParse(details);
     if (!parsed.success) return toast.error("Please enter your name and a valid email.");
     if (!selected) return;
     if ((selected.price_cents ?? 0) === 0) {
-      // Free: create booking and jump to scheduling
       const { error } = await supabase.from("bookings").insert({
         full_name: details.full_name,
         email: details.email,
@@ -66,8 +66,20 @@ function Book() {
       if (error) return toast.error("Could not create booking. Please try again.");
       setStep(3);
     } else {
-      // Paid: redirect to Stripe (placeholder — wire edge function next)
-      toast.info("Payment is not yet enabled. Add your Stripe key to enable checkout.");
+      try {
+        const { url } = await startCheckout({
+          data: {
+            consultation_type_id: selected.id,
+            full_name: details.full_name,
+            email: details.email,
+            phone: details.phone || undefined,
+            origin: window.location.origin,
+          },
+        });
+        window.location.href = url;
+      } catch (e) {
+        toast.error(e instanceof Error ? e.message : "Could not start checkout.");
+      }
     }
   }
 
