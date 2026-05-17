@@ -97,6 +97,8 @@ export type Database = {
       bookings: {
         Row: {
           calendly_event_url: string | null
+          calendly_invitee_uri: string | null
+          cancelled_at: string | null
           consultation_type_id: string | null
           created_at: string | null
           email: string
@@ -105,11 +107,14 @@ export type Database = {
           notes: string | null
           payment_status: string | null
           phone: string | null
+          scheduled_at: string | null
           stripe_payment_intent_id: string | null
           stripe_session_id: string | null
         }
         Insert: {
           calendly_event_url?: string | null
+          calendly_invitee_uri?: string | null
+          cancelled_at?: string | null
           consultation_type_id?: string | null
           created_at?: string | null
           email: string
@@ -118,11 +123,14 @@ export type Database = {
           notes?: string | null
           payment_status?: string | null
           phone?: string | null
+          scheduled_at?: string | null
           stripe_payment_intent_id?: string | null
           stripe_session_id?: string | null
         }
         Update: {
           calendly_event_url?: string | null
+          calendly_invitee_uri?: string | null
+          cancelled_at?: string | null
           consultation_type_id?: string | null
           created_at?: string | null
           email?: string
@@ -131,6 +139,7 @@ export type Database = {
           notes?: string | null
           payment_status?: string | null
           phone?: string | null
+          scheduled_at?: string | null
           stripe_payment_intent_id?: string | null
           stripe_session_id?: string | null
         }
