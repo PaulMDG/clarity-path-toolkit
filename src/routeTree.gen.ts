@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as FaqsRouteImport } from './routes/faqs'
@@ -22,6 +23,7 @@ import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as ServicesSlugRouteImport } from './routes/services/$slug'
+import { Route as PSlugRouteImport } from './routes/p.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminNavigationRouteImport } from './routes/admin/navigation'
@@ -35,6 +37,8 @@ import { Route as AdminPagesIndexRouteImport } from './routes/admin/pages.index'
 import { Route as AdminFaqsIndexRouteImport } from './routes/admin/faqs.index'
 import { Route as AdminConsultationTypesIndexRouteImport } from './routes/admin/consultation-types.index'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin/blog.index'
+import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
+import { Route as ApiPublicCalendlyRouteImport } from './routes/api/public/calendly'
 import { Route as AdminTestimonialsIdRouteImport } from './routes/admin/testimonials.$id'
 import { Route as AdminServicesIdRouteImport } from './routes/admin/services.$id'
 import { Route as AdminResourcesIdRouteImport } from './routes/admin/resources.$id'
@@ -46,6 +50,11 @@ import { Route as AdminBlogIdRouteImport } from './routes/admin/blog.$id'
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   id: '/terms-and-conditions',
   path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesRoute = ResourcesRouteImport.update({
@@ -106,6 +115,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PSlugRoute = PSlugRouteImport.update({
+  id: '/p/$slug',
+  path: '/p/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -174,6 +188,16 @@ const AdminBlogIndexRoute = AdminBlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
+  id: '/api/public/stripe-webhook',
+  path: '/api/public/stripe-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicCalendlyRoute = ApiPublicCalendlyRouteImport.update({
+  id: '/api/public/calendly',
+  path: '/api/public/calendly',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminTestimonialsIdRoute = AdminTestimonialsIdRouteImport.update({
   id: '/testimonials/$id',
   path: '/testimonials/$id',
@@ -220,6 +244,7 @@ export interface FileRoutesByFullPath {
   '/faqs': typeof FaqsRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resources': typeof ResourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/contact': typeof AdminContactRoute
@@ -227,6 +252,7 @@ export interface FileRoutesByFullPath {
   '/admin/navigation': typeof AdminNavigationRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/p/$slug': typeof PSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
@@ -238,6 +264,8 @@ export interface FileRoutesByFullPath {
   '/admin/resources/$id': typeof AdminResourcesIdRoute
   '/admin/services/$id': typeof AdminServicesIdRoute
   '/admin/testimonials/$id': typeof AdminTestimonialsIdRoute
+  '/api/public/calendly': typeof ApiPublicCalendlyRoute
+  '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/consultation-types/': typeof AdminConsultationTypesIndexRoute
   '/admin/faqs/': typeof AdminFaqsIndexRoute
@@ -254,6 +282,7 @@ export interface FileRoutesByTo {
   '/faqs': typeof FaqsRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resources': typeof ResourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/contact': typeof AdminContactRoute
@@ -261,6 +290,7 @@ export interface FileRoutesByTo {
   '/admin/navigation': typeof AdminNavigationRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/p/$slug': typeof PSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
@@ -272,6 +302,8 @@ export interface FileRoutesByTo {
   '/admin/resources/$id': typeof AdminResourcesIdRoute
   '/admin/services/$id': typeof AdminServicesIdRoute
   '/admin/testimonials/$id': typeof AdminTestimonialsIdRoute
+  '/api/public/calendly': typeof ApiPublicCalendlyRoute
+  '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/admin/blog': typeof AdminBlogIndexRoute
   '/admin/consultation-types': typeof AdminConsultationTypesIndexRoute
   '/admin/faqs': typeof AdminFaqsIndexRoute
@@ -290,6 +322,7 @@ export interface FileRoutesById {
   '/faqs': typeof FaqsRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resources': typeof ResourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/contact': typeof AdminContactRoute
@@ -297,6 +330,7 @@ export interface FileRoutesById {
   '/admin/navigation': typeof AdminNavigationRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/p/$slug': typeof PSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
@@ -308,6 +342,8 @@ export interface FileRoutesById {
   '/admin/resources/$id': typeof AdminResourcesIdRoute
   '/admin/services/$id': typeof AdminServicesIdRoute
   '/admin/testimonials/$id': typeof AdminTestimonialsIdRoute
+  '/api/public/calendly': typeof ApiPublicCalendlyRoute
+  '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
   '/admin/consultation-types/': typeof AdminConsultationTypesIndexRoute
   '/admin/faqs/': typeof AdminFaqsIndexRoute
@@ -327,6 +363,7 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/privacy-policy'
     | '/resources'
+    | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/admin/bookings'
     | '/admin/contact'
@@ -334,6 +371,7 @@ export interface FileRouteTypes {
     | '/admin/navigation'
     | '/admin/settings'
     | '/blog/$slug'
+    | '/p/$slug'
     | '/services/$slug'
     | '/admin/'
     | '/blog/'
@@ -345,6 +383,8 @@ export interface FileRouteTypes {
     | '/admin/resources/$id'
     | '/admin/services/$id'
     | '/admin/testimonials/$id'
+    | '/api/public/calendly'
+    | '/api/public/stripe-webhook'
     | '/admin/blog/'
     | '/admin/consultation-types/'
     | '/admin/faqs/'
@@ -361,6 +401,7 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/privacy-policy'
     | '/resources'
+    | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/admin/bookings'
     | '/admin/contact'
@@ -368,6 +409,7 @@ export interface FileRouteTypes {
     | '/admin/navigation'
     | '/admin/settings'
     | '/blog/$slug'
+    | '/p/$slug'
     | '/services/$slug'
     | '/admin'
     | '/blog'
@@ -379,6 +421,8 @@ export interface FileRouteTypes {
     | '/admin/resources/$id'
     | '/admin/services/$id'
     | '/admin/testimonials/$id'
+    | '/api/public/calendly'
+    | '/api/public/stripe-webhook'
     | '/admin/blog'
     | '/admin/consultation-types'
     | '/admin/faqs'
@@ -396,6 +440,7 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/privacy-policy'
     | '/resources'
+    | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/admin/bookings'
     | '/admin/contact'
@@ -403,6 +448,7 @@ export interface FileRouteTypes {
     | '/admin/navigation'
     | '/admin/settings'
     | '/blog/$slug'
+    | '/p/$slug'
     | '/services/$slug'
     | '/admin/'
     | '/blog/'
@@ -414,6 +460,8 @@ export interface FileRouteTypes {
     | '/admin/resources/$id'
     | '/admin/services/$id'
     | '/admin/testimonials/$id'
+    | '/api/public/calendly'
+    | '/api/public/stripe-webhook'
     | '/admin/blog/'
     | '/admin/consultation-types/'
     | '/admin/faqs/'
@@ -432,11 +480,15 @@ export interface RootRouteChildren {
   FaqsRoute: typeof FaqsRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ResourcesRoute: typeof ResourcesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  PSlugRoute: typeof PSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
+  ApiPublicCalendlyRoute: typeof ApiPublicCalendlyRoute
+  ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -446,6 +498,13 @@ declare module '@tanstack/react-router' {
       path: '/terms-and-conditions'
       fullPath: '/terms-and-conditions'
       preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources': {
@@ -530,6 +589,13 @@ declare module '@tanstack/react-router' {
       path: '/services/$slug'
       fullPath: '/services/$slug'
       preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p/$slug': {
+      id: '/p/$slug'
+      path: '/p/$slug'
+      fullPath: '/p/$slug'
+      preLoaderRoute: typeof PSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -622,6 +688,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/blog/'
       preLoaderRoute: typeof AdminBlogIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/api/public/stripe-webhook': {
+      id: '/api/public/stripe-webhook'
+      path: '/api/public/stripe-webhook'
+      fullPath: '/api/public/stripe-webhook'
+      preLoaderRoute: typeof ApiPublicStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/calendly': {
+      id: '/api/public/calendly'
+      path: '/api/public/calendly'
+      fullPath: '/api/public/calendly'
+      preLoaderRoute: typeof ApiPublicCalendlyRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/testimonials/$id': {
       id: '/admin/testimonials/$id'
@@ -732,11 +812,15 @@ const rootRouteChildren: RootRouteChildren = {
   FaqsRoute: FaqsRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ResourcesRoute: ResourcesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   BlogSlugRoute: BlogSlugRoute,
+  PSlugRoute: PSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
+  ApiPublicCalendlyRoute: ApiPublicCalendlyRoute,
+  ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
