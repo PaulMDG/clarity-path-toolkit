@@ -61,7 +61,7 @@ function Settings() {
     catch { toast.error("Social links is not valid JSON"); setBusy(false); return; }
     try { home = JSON.parse(form.homepage_content || "{}"); }
     catch { toast.error("Homepage content is not valid JSON"); setBusy(false); return; }
-    const payload = { ...form, social_links: social, homepage_content: home };
+    const payload = { ...form, social_links: social as never, homepage_content: home as never };
     const res = id
       ? await supabase.from("site_settings").update(payload).eq("id", id)
       : await supabase.from("site_settings").insert(payload);

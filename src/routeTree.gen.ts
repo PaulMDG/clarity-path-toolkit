@@ -23,7 +23,25 @@ import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as ServicesSlugRouteImport } from './routes/services/$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminNavigationRouteImport } from './routes/admin/navigation'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminContactRouteImport } from './routes/admin/contact'
+import { Route as AdminBookingsRouteImport } from './routes/admin/bookings'
+import { Route as AdminTestimonialsIndexRouteImport } from './routes/admin/testimonials.index'
+import { Route as AdminServicesIndexRouteImport } from './routes/admin/services.index'
+import { Route as AdminResourcesIndexRouteImport } from './routes/admin/resources.index'
+import { Route as AdminPagesIndexRouteImport } from './routes/admin/pages.index'
+import { Route as AdminFaqsIndexRouteImport } from './routes/admin/faqs.index'
+import { Route as AdminConsultationTypesIndexRouteImport } from './routes/admin/consultation-types.index'
+import { Route as AdminBlogIndexRouteImport } from './routes/admin/blog.index'
+import { Route as AdminTestimonialsIdRouteImport } from './routes/admin/testimonials.$id'
+import { Route as AdminServicesIdRouteImport } from './routes/admin/services.$id'
+import { Route as AdminResourcesIdRouteImport } from './routes/admin/resources.$id'
+import { Route as AdminPagesIdRouteImport } from './routes/admin/pages.$id'
+import { Route as AdminFaqsIdRouteImport } from './routes/admin/faqs.$id'
+import { Route as AdminConsultationTypesIdRouteImport } from './routes/admin/consultation-types.$id'
+import { Route as AdminBlogIdRouteImport } from './routes/admin/blog.$id'
 
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   id: '/terms-and-conditions',
@@ -95,9 +113,101 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNavigationRoute = AdminNavigationRouteImport.update({
+  id: '/navigation',
+  path: '/navigation',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContactRoute = AdminContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBookingsRoute = AdminBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTestimonialsIndexRoute = AdminTestimonialsIndexRouteImport.update({
+  id: '/testimonials/',
+  path: '/testimonials/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicesIndexRoute = AdminServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminResourcesIndexRoute = AdminResourcesIndexRouteImport.update({
+  id: '/resources/',
+  path: '/resources/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPagesIndexRoute = AdminPagesIndexRouteImport.update({
+  id: '/pages/',
+  path: '/pages/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFaqsIndexRoute = AdminFaqsIndexRouteImport.update({
+  id: '/faqs/',
+  path: '/faqs/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConsultationTypesIndexRoute =
+  AdminConsultationTypesIndexRouteImport.update({
+    id: '/consultation-types/',
+    path: '/consultation-types/',
+    getParentRoute: () => AdminRoute,
+  } as any)
+const AdminBlogIndexRoute = AdminBlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTestimonialsIdRoute = AdminTestimonialsIdRouteImport.update({
+  id: '/testimonials/$id',
+  path: '/testimonials/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicesIdRoute = AdminServicesIdRouteImport.update({
+  id: '/services/$id',
+  path: '/services/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminResourcesIdRoute = AdminResourcesIdRouteImport.update({
+  id: '/resources/$id',
+  path: '/resources/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPagesIdRoute = AdminPagesIdRouteImport.update({
+  id: '/pages/$id',
+  path: '/pages/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFaqsIdRoute = AdminFaqsIdRouteImport.update({
+  id: '/faqs/$id',
+  path: '/faqs/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConsultationTypesIdRoute =
+  AdminConsultationTypesIdRouteImport.update({
+    id: '/consultation-types/$id',
+    path: '/consultation-types/$id',
+    getParentRoute: () => AdminRoute,
+  } as any)
+const AdminBlogIdRoute = AdminBlogIdRouteImport.update({
+  id: '/blog/$id',
+  path: '/blog/$id',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -111,12 +221,30 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resources': typeof ResourcesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/contact': typeof AdminContactRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/navigation': typeof AdminNavigationRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/admin/blog/$id': typeof AdminBlogIdRoute
+  '/admin/consultation-types/$id': typeof AdminConsultationTypesIdRoute
+  '/admin/faqs/$id': typeof AdminFaqsIdRoute
+  '/admin/pages/$id': typeof AdminPagesIdRoute
+  '/admin/resources/$id': typeof AdminResourcesIdRoute
+  '/admin/services/$id': typeof AdminServicesIdRoute
+  '/admin/testimonials/$id': typeof AdminTestimonialsIdRoute
+  '/admin/blog/': typeof AdminBlogIndexRoute
+  '/admin/consultation-types/': typeof AdminConsultationTypesIndexRoute
+  '/admin/faqs/': typeof AdminFaqsIndexRoute
+  '/admin/pages/': typeof AdminPagesIndexRoute
+  '/admin/resources/': typeof AdminResourcesIndexRoute
+  '/admin/services/': typeof AdminServicesIndexRoute
+  '/admin/testimonials/': typeof AdminTestimonialsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -127,12 +255,30 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resources': typeof ResourcesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/contact': typeof AdminContactRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/navigation': typeof AdminNavigationRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/admin/blog/$id': typeof AdminBlogIdRoute
+  '/admin/consultation-types/$id': typeof AdminConsultationTypesIdRoute
+  '/admin/faqs/$id': typeof AdminFaqsIdRoute
+  '/admin/pages/$id': typeof AdminPagesIdRoute
+  '/admin/resources/$id': typeof AdminResourcesIdRoute
+  '/admin/services/$id': typeof AdminServicesIdRoute
+  '/admin/testimonials/$id': typeof AdminTestimonialsIdRoute
+  '/admin/blog': typeof AdminBlogIndexRoute
+  '/admin/consultation-types': typeof AdminConsultationTypesIndexRoute
+  '/admin/faqs': typeof AdminFaqsIndexRoute
+  '/admin/pages': typeof AdminPagesIndexRoute
+  '/admin/resources': typeof AdminResourcesIndexRoute
+  '/admin/services': typeof AdminServicesIndexRoute
+  '/admin/testimonials': typeof AdminTestimonialsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -145,12 +291,30 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resources': typeof ResourcesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/contact': typeof AdminContactRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/navigation': typeof AdminNavigationRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/admin/blog/$id': typeof AdminBlogIdRoute
+  '/admin/consultation-types/$id': typeof AdminConsultationTypesIdRoute
+  '/admin/faqs/$id': typeof AdminFaqsIdRoute
+  '/admin/pages/$id': typeof AdminPagesIdRoute
+  '/admin/resources/$id': typeof AdminResourcesIdRoute
+  '/admin/services/$id': typeof AdminServicesIdRoute
+  '/admin/testimonials/$id': typeof AdminTestimonialsIdRoute
+  '/admin/blog/': typeof AdminBlogIndexRoute
+  '/admin/consultation-types/': typeof AdminConsultationTypesIndexRoute
+  '/admin/faqs/': typeof AdminFaqsIndexRoute
+  '/admin/pages/': typeof AdminPagesIndexRoute
+  '/admin/resources/': typeof AdminResourcesIndexRoute
+  '/admin/services/': typeof AdminServicesIndexRoute
+  '/admin/testimonials/': typeof AdminTestimonialsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -164,12 +328,30 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/resources'
     | '/terms-and-conditions'
+    | '/admin/bookings'
+    | '/admin/contact'
     | '/admin/login'
+    | '/admin/navigation'
+    | '/admin/settings'
     | '/blog/$slug'
     | '/services/$slug'
     | '/admin/'
     | '/blog/'
     | '/services/'
+    | '/admin/blog/$id'
+    | '/admin/consultation-types/$id'
+    | '/admin/faqs/$id'
+    | '/admin/pages/$id'
+    | '/admin/resources/$id'
+    | '/admin/services/$id'
+    | '/admin/testimonials/$id'
+    | '/admin/blog/'
+    | '/admin/consultation-types/'
+    | '/admin/faqs/'
+    | '/admin/pages/'
+    | '/admin/resources/'
+    | '/admin/services/'
+    | '/admin/testimonials/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -180,12 +362,30 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/resources'
     | '/terms-and-conditions'
+    | '/admin/bookings'
+    | '/admin/contact'
     | '/admin/login'
+    | '/admin/navigation'
+    | '/admin/settings'
     | '/blog/$slug'
     | '/services/$slug'
     | '/admin'
     | '/blog'
     | '/services'
+    | '/admin/blog/$id'
+    | '/admin/consultation-types/$id'
+    | '/admin/faqs/$id'
+    | '/admin/pages/$id'
+    | '/admin/resources/$id'
+    | '/admin/services/$id'
+    | '/admin/testimonials/$id'
+    | '/admin/blog'
+    | '/admin/consultation-types'
+    | '/admin/faqs'
+    | '/admin/pages'
+    | '/admin/resources'
+    | '/admin/services'
+    | '/admin/testimonials'
   id:
     | '__root__'
     | '/'
@@ -197,12 +397,30 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/resources'
     | '/terms-and-conditions'
+    | '/admin/bookings'
+    | '/admin/contact'
     | '/admin/login'
+    | '/admin/navigation'
+    | '/admin/settings'
     | '/blog/$slug'
     | '/services/$slug'
     | '/admin/'
     | '/blog/'
     | '/services/'
+    | '/admin/blog/$id'
+    | '/admin/consultation-types/$id'
+    | '/admin/faqs/$id'
+    | '/admin/pages/$id'
+    | '/admin/resources/$id'
+    | '/admin/services/$id'
+    | '/admin/testimonials/$id'
+    | '/admin/blog/'
+    | '/admin/consultation-types/'
+    | '/admin/faqs/'
+    | '/admin/pages/'
+    | '/admin/resources/'
+    | '/admin/services/'
+    | '/admin/testimonials/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -321,6 +539,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/navigation': {
+      id: '/admin/navigation'
+      path: '/navigation'
+      fullPath: '/admin/navigation'
+      preLoaderRoute: typeof AdminNavigationRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -328,17 +560,165 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/contact': {
+      id: '/admin/contact'
+      path: '/contact'
+      fullPath: '/admin/contact'
+      preLoaderRoute: typeof AdminContactRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/testimonials/': {
+      id: '/admin/testimonials/'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials/'
+      preLoaderRoute: typeof AdminTestimonialsIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/services/': {
+      id: '/admin/services/'
+      path: '/services'
+      fullPath: '/admin/services/'
+      preLoaderRoute: typeof AdminServicesIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/resources/': {
+      id: '/admin/resources/'
+      path: '/resources'
+      fullPath: '/admin/resources/'
+      preLoaderRoute: typeof AdminResourcesIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pages/': {
+      id: '/admin/pages/'
+      path: '/pages'
+      fullPath: '/admin/pages/'
+      preLoaderRoute: typeof AdminPagesIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/faqs/': {
+      id: '/admin/faqs/'
+      path: '/faqs'
+      fullPath: '/admin/faqs/'
+      preLoaderRoute: typeof AdminFaqsIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/consultation-types/': {
+      id: '/admin/consultation-types/'
+      path: '/consultation-types'
+      fullPath: '/admin/consultation-types/'
+      preLoaderRoute: typeof AdminConsultationTypesIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/blog/': {
+      id: '/admin/blog/'
+      path: '/blog'
+      fullPath: '/admin/blog/'
+      preLoaderRoute: typeof AdminBlogIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/testimonials/$id': {
+      id: '/admin/testimonials/$id'
+      path: '/testimonials/$id'
+      fullPath: '/admin/testimonials/$id'
+      preLoaderRoute: typeof AdminTestimonialsIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/services/$id': {
+      id: '/admin/services/$id'
+      path: '/services/$id'
+      fullPath: '/admin/services/$id'
+      preLoaderRoute: typeof AdminServicesIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/resources/$id': {
+      id: '/admin/resources/$id'
+      path: '/resources/$id'
+      fullPath: '/admin/resources/$id'
+      preLoaderRoute: typeof AdminResourcesIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pages/$id': {
+      id: '/admin/pages/$id'
+      path: '/pages/$id'
+      fullPath: '/admin/pages/$id'
+      preLoaderRoute: typeof AdminPagesIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/faqs/$id': {
+      id: '/admin/faqs/$id'
+      path: '/faqs/$id'
+      fullPath: '/admin/faqs/$id'
+      preLoaderRoute: typeof AdminFaqsIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/consultation-types/$id': {
+      id: '/admin/consultation-types/$id'
+      path: '/consultation-types/$id'
+      fullPath: '/admin/consultation-types/$id'
+      preLoaderRoute: typeof AdminConsultationTypesIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/blog/$id': {
+      id: '/admin/blog/$id'
+      path: '/blog/$id'
+      fullPath: '/admin/blog/$id'
+      preLoaderRoute: typeof AdminBlogIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminBookingsRoute: typeof AdminBookingsRoute
+  AdminContactRoute: typeof AdminContactRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminNavigationRoute: typeof AdminNavigationRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminBlogIdRoute: typeof AdminBlogIdRoute
+  AdminConsultationTypesIdRoute: typeof AdminConsultationTypesIdRoute
+  AdminFaqsIdRoute: typeof AdminFaqsIdRoute
+  AdminPagesIdRoute: typeof AdminPagesIdRoute
+  AdminResourcesIdRoute: typeof AdminResourcesIdRoute
+  AdminServicesIdRoute: typeof AdminServicesIdRoute
+  AdminTestimonialsIdRoute: typeof AdminTestimonialsIdRoute
+  AdminBlogIndexRoute: typeof AdminBlogIndexRoute
+  AdminConsultationTypesIndexRoute: typeof AdminConsultationTypesIndexRoute
+  AdminFaqsIndexRoute: typeof AdminFaqsIndexRoute
+  AdminPagesIndexRoute: typeof AdminPagesIndexRoute
+  AdminResourcesIndexRoute: typeof AdminResourcesIndexRoute
+  AdminServicesIndexRoute: typeof AdminServicesIndexRoute
+  AdminTestimonialsIndexRoute: typeof AdminTestimonialsIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminBookingsRoute: AdminBookingsRoute,
+  AdminContactRoute: AdminContactRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminNavigationRoute: AdminNavigationRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminBlogIdRoute: AdminBlogIdRoute,
+  AdminConsultationTypesIdRoute: AdminConsultationTypesIdRoute,
+  AdminFaqsIdRoute: AdminFaqsIdRoute,
+  AdminPagesIdRoute: AdminPagesIdRoute,
+  AdminResourcesIdRoute: AdminResourcesIdRoute,
+  AdminServicesIdRoute: AdminServicesIdRoute,
+  AdminTestimonialsIdRoute: AdminTestimonialsIdRoute,
+  AdminBlogIndexRoute: AdminBlogIndexRoute,
+  AdminConsultationTypesIndexRoute: AdminConsultationTypesIndexRoute,
+  AdminFaqsIndexRoute: AdminFaqsIndexRoute,
+  AdminPagesIndexRoute: AdminPagesIndexRoute,
+  AdminResourcesIndexRoute: AdminResourcesIndexRoute,
+  AdminServicesIndexRoute: AdminServicesIndexRoute,
+  AdminTestimonialsIndexRoute: AdminTestimonialsIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
