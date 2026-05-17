@@ -17,7 +17,9 @@ export const Route = createFileRoute("/book-consultation")({
   head: () => ({ meta: [{ title: "Book a Consultation | ClarityPath" }] }),
   validateSearch: (s: Record<string, unknown>) => ({
     success: s.success === "true" || s.success === true,
+    canceled: s.canceled === "true" || s.canceled === true,
     session_id: typeof s.session_id === "string" ? s.session_id : undefined,
+    booking_id: typeof s.booking_id === "string" ? s.booking_id : undefined,
   }),
 });
 
@@ -45,8 +47,22 @@ function Book() {
   });
 
   useEffect(() => {
-    if (search.success) setStep(3);
-  }, [search.success]);
+    if (search.success || search.canceled) setStep(3);
+  }, [search.success, search.canceled]);
+
+  const { data: bookingDetails } = useQuery({
+    queryKey: ["booking-confirm", search.booking_id],
+    enabled: !!search.booking_id,
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("bookings")
+        .select("id, full_name, email, payment_status, scheduled_at, cancelled_at, consultation_types(title, price_cents)")
+        .eq("id", search.booking_id!)
+        .maybeSingle();
+      return data;
+    },
+    refetchInterval: (query) => (query.state.data?.payment_status === "pending" ? 3000 : false),
+  });
 
   const selected = types?.find((t) => t.id === selectedId);
   const startCheckout = useServerFn(createCheckoutSession);
@@ -128,27 +144,67 @@ function Book() {
           )}
 
           {step === 3 && (
-            <div className="mt-8 card-cp text-center">
-              <CheckCircle2 size={48} className="mx-auto" color="#2D6A4F" />
-              <h2 className="mt-4 font-serif text-[28px]">You're booked.</h2>
-              <p className="mt-2" style={{ color: "#6B7280" }}>
-                {settings?.calendly_url_free || settings?.calendly_url_paid
-                  ? "Pick a time below that works for you."
-                  : "Scheduling will appear here once a Calendly URL is configured in admin settings."}
-              </p>
-              {(settings?.calendly_url_free || settings?.calendly_url_paid) && (
-                <iframe
-                  title="Calendly"
-                  src={settings.calendly_url_paid || settings.calendly_url_free || ""}
-                  className="mt-6 w-full rounded-xl border"
-                  style={{ height: 700, borderColor: "#E5E7EB" }}
-                />
+            <div className="mt-8 card-cp">
+              {search.canceled ? (
+                <div className="text-center">
+                  <h2 className="font-serif text-[28px]" style={{ color: "#1A2B3C" }}>Payment canceled</h2>
+                  <p className="mt-2" style={{ color: "#6B7280" }}>
+                    No charge was made. You can try again whenever you're ready.
+                  </p>
+                  <button onClick={() => { setStep(1); }} className="btn-primary mt-6">Start over</button>
+                </div>
+              ) : (
+                <>
+                  <div className="text-center">
+                    <CheckCircle2 size={48} className="mx-auto" color="#2D6A4F" />
+                    <h2 className="mt-4 font-serif text-[28px]">You're booked.</h2>
+                    {bookingDetails && (
+                      <div className="mx-auto mt-4 max-w-md rounded-lg border p-4 text-left text-sm" style={{ borderColor: "#E5E7EB", background: "#F9F8F6" }}>
+                        <Row label="Name" value={bookingDetails.full_name} />
+                        <Row label="Email" value={bookingDetails.email} />
+                        {(bookingDetails as { consultation_types?: { title?: string } }).consultation_types?.title && (
+                          <Row label="Consultation" value={(bookingDetails as { consultation_types?: { title?: string } }).consultation_types!.title!} />
+                        )}
+                        <Row label="Status" value={
+                          bookingDetails.payment_status === "paid" ? "Paid ✓" :
+                          bookingDetails.payment_status === "pending" ? "Confirming payment…" :
+                          bookingDetails.payment_status ?? "—"
+                        } />
+                        {bookingDetails.scheduled_at && (
+                          <Row label="Scheduled" value={new Date(bookingDetails.scheduled_at).toLocaleString()} />
+                        )}
+                      </div>
+                    )}
+                    <p className="mt-4" style={{ color: "#6B7280" }}>
+                      {settings?.calendly_url_free || settings?.calendly_url_paid
+                        ? "Pick a time below that works for you."
+                        : "Scheduling will appear here once a Calendly URL is configured in admin settings."}
+                    </p>
+                  </div>
+                  {(settings?.calendly_url_free || settings?.calendly_url_paid) && (
+                    <iframe
+                      title="Calendly"
+                      src={settings.calendly_url_paid || settings.calendly_url_free || ""}
+                      className="mt-6 w-full rounded-xl border"
+                      style={{ height: 700, borderColor: "#E5E7EB" }}
+                    />
+                  )}
+                </>
               )}
             </div>
           )}
         </div>
       </section>
     </SiteShell>
+  );
+}
+
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between gap-3 border-b py-2 last:border-0" style={{ borderColor: "#E5E7EB" }}>
+      <span className="text-xs uppercase tracking-wider" style={{ color: "#6B7280" }}>{label}</span>
+      <span className="font-medium" style={{ color: "#1A2B3C" }}>{value}</span>
+    </div>
   );
 }
 
