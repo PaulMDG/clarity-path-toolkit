@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { createClient } from "@supabase/supabase-js";
+import { getServiceClient, loadSecrets } from "@/lib/webhooks.server";
 
 const schema = z.object({
   consultation_type_id: z.string().uuid(),
@@ -13,15 +13,13 @@ const schema = z.object({
 export const createCheckoutSession = createServerFn({ method: "POST" })
   .inputValidator((input) => schema.parse(input))
   .handler(async ({ data }) => {
-    const stripeKey = process.env.STRIPE_SECRET_KEY;
-    if (!stripeKey) throw new Error("Stripe is not configured.");
+    const admin = getServiceClient();
+    const secrets = await loadSecrets(admin);
+    const stripeKey = secrets.stripe_secret_key;
+    if (!stripeKey) {
+      throw new Error("Stripe is not configured. Add a Stripe secret key in Admin → Settings.");
+    }
 
-    const admin = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    );
-
-    // Load consultation type from server (trust)
     const { data: type, error: typeErr } = await admin
       .from("consultation_types")
       .select("id, title, description, price_cents, is_active")
@@ -34,7 +32,6 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       throw new Error("This consultation is free — no payment required.");
     }
 
-    // Create pending booking
     const { data: booking, error: bErr } = await admin
       .from("bookings")
       .insert({
@@ -48,11 +45,10 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       .single();
     if (bErr || !booking) throw new Error("Could not create booking.");
 
-    // Create Stripe Checkout Session via REST
     const params = new URLSearchParams();
     params.append("mode", "payment");
-    params.append("success_url", `${data.origin}/book-consultation?success=true&session_id={CHECKOUT_SESSION_ID}`);
-    params.append("cancel_url", `${data.origin}/book-consultation?canceled=true`);
+    params.append("success_url", `${data.origin}/book-consultation?success=true&booking_id=${booking.id}&session_id={CHECKOUT_SESSION_ID}`);
+    params.append("cancel_url", `${data.origin}/book-consultation?canceled=true&booking_id=${booking.id}`);
     params.append("customer_email", data.email);
     params.append("client_reference_id", booking.id);
     params.append("metadata[booking_id]", booking.id);
@@ -79,5 +75,5 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
     }
 
     await admin.from("bookings").update({ stripe_session_id: json.id }).eq("id", booking.id);
-    return { url: json.url };
+    return { url: json.url, booking_id: booking.id };
   });
