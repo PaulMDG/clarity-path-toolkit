@@ -1,7 +1,7 @@
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import {
   LayoutDashboard, Briefcase, FileText, BookOpen, FolderOpen,
-  HelpCircle, Star, Calendar, Settings, Menu, LogOut, Inbox, Layers,
+  HelpCircle, Star, Calendar, Settings, Menu, LogOut, Inbox, Layers, Users,
 } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
@@ -18,6 +18,7 @@ const nav = [
   { to: "/admin/bookings", label: "Bookings", icon: Inbox },
   { to: "/admin/contact", label: "Contact", icon: Inbox },
   { to: "/admin/navigation", label: "Navigation", icon: Layers },
+  { to: "/admin/users", label: "Admin Users", icon: Users },
   { to: "/admin/settings", label: "Site Settings", icon: Settings },
 ];
 
