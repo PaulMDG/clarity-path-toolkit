@@ -47,8 +47,22 @@ function Book() {
   });
 
   useEffect(() => {
-    if (search.success) setStep(3);
-  }, [search.success]);
+    if (search.success || search.canceled) setStep(3);
+  }, [search.success, search.canceled]);
+
+  const { data: bookingDetails } = useQuery({
+    queryKey: ["booking-confirm", search.booking_id],
+    enabled: !!search.booking_id,
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("bookings")
+        .select("id, full_name, email, payment_status, scheduled_at, cancelled_at, consultation_types(title, price_cents)")
+        .eq("id", search.booking_id!)
+        .maybeSingle();
+      return data;
+    },
+    refetchInterval: (query) => (query.state.data?.payment_status === "pending" ? 3000 : false),
+  });
 
   const selected = types?.find((t) => t.id === selectedId);
   const startCheckout = useServerFn(createCheckoutSession);
