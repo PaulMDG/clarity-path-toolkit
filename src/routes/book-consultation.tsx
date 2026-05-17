@@ -52,7 +52,7 @@ function Book() {
     const parsed = detailsSchema.safeParse(details);
     if (!parsed.success) return toast.error("Please enter your name and a valid email.");
     if (!selected) return;
-    if (selected.price_cents === 0) {
+    if ((selected.price_cents ?? 0) === 0) {
       // Free: create booking and jump to scheduling
       const { error } = await supabase.from("bookings").insert({
         full_name: details.full_name,
@@ -88,7 +88,7 @@ function Book() {
                   <div className="flex items-baseline justify-between gap-2">
                     <h3 className="font-serif text-[22px]">{t.title}</h3>
                     <span className="font-serif text-[20px]" style={{ color: "#2D6A4F" }}>
-                      {t.price_cents === 0 ? "Free" : `€${(t.price_cents / 100).toFixed(0)}`}
+                      {(t.price_cents ?? 0) === 0 ? "Free" : `€${((t.price_cents ?? 0) / 100).toFixed(0)}`}
                     </span>
                   </div>
                   <p className="mt-2 text-[14px]" style={{ color: "#6B7280" }}>{t.description}</p>
@@ -107,7 +107,7 @@ function Book() {
               <div className="flex justify-between gap-3 pt-2">
                 <button onClick={() => setStep(1)} className="btn-secondary">← Back</button>
                 <button onClick={handleContinue} className="btn-primary">
-                  {selected.price_cents === 0 ? "Continue to scheduling →" : `Pay €${(selected.price_cents / 100).toFixed(0)} →`}
+                  {(selected.price_cents ?? 0) === 0 ? "Continue to scheduling →" : `Pay €${((selected.price_cents ?? 0) / 100).toFixed(0)} →`}
                 </button>
               </div>
             </div>
