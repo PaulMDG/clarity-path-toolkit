@@ -219,7 +219,7 @@ function UsersPage() {
                       <button
                         disabled={!iAmSuper || isMe}
                         onClick={() => {
-                          if (confirm(`Delete ${u.email}? This cannot be undone.`))
+                          if (window.confirm(`Delete ${u.email}? This cannot be undone.`))
                             mDel.mutate(u.id);
                         }}
                         className="inline-flex items-center gap-1 rounded border border-destructive/30 px-2 py-1 text-xs text-destructive hover:bg-destructive/10 disabled:opacity-50"
