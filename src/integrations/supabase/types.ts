@@ -249,6 +249,33 @@ export type Database = {
         }
         Relationships: []
       }
+      integration_secrets: {
+        Row: {
+          calendly_personal_token: string | null
+          calendly_webhook_signing_key: string | null
+          id: string
+          stripe_secret_key: string | null
+          stripe_webhook_secret: string | null
+          updated_at: string
+        }
+        Insert: {
+          calendly_personal_token?: string | null
+          calendly_webhook_signing_key?: string | null
+          id?: string
+          stripe_secret_key?: string | null
+          stripe_webhook_secret?: string | null
+          updated_at?: string
+        }
+        Update: {
+          calendly_personal_token?: string | null
+          calendly_webhook_signing_key?: string | null
+          id?: string
+          stripe_secret_key?: string | null
+          stripe_webhook_secret?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       navigation_items: {
         Row: {
           created_at: string | null
@@ -557,6 +584,30 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      webhook_events: {
+        Row: {
+          event_id: string
+          event_type: string | null
+          id: string
+          processed_at: string
+          provider: string
+        }
+        Insert: {
+          event_id: string
+          event_type?: string | null
+          id?: string
+          processed_at?: string
+          provider: string
+        }
+        Update: {
+          event_id?: string
+          event_type?: string | null
+          id?: string
+          processed_at?: string
+          provider?: string
         }
         Relationships: []
       }
