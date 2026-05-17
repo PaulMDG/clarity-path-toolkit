@@ -1,0 +1,149 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ClarityPath design system.
+ * Navy + forest green + warm off-white.
+ * Playfair Display serif for headings, Inter sans for body.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme inline {
+  --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-navy: #1A2B3C;
+  --color-forest: #2D6A4F;
+  --color-forest-hover: #245A42;
+  --color-forest-tint: #EAF3EE;
+  --color-cream: #F9F8F6;
+}
+
+:root {
+  --radius: 8px;
+
+  /* Off-white background, navy text */
+  --background: #FFFFFF;
+  --foreground: #1A2B3C;
+  --card: #FFFFFF;
+  --card-foreground: #1A2B3C;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A2B3C;
+
+  /* Primary = forest green */
+  --primary: #2D6A4F;
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary = navy */
+  --secondary: #1A2B3C;
+  --secondary-foreground: #FFFFFF;
+
+  --muted: #F9F8F6;
+  --muted-foreground: #6B7280;
+  --accent: #EAF3EE;
+  --accent-foreground: #2D6A4F;
+  --destructive: #B91C1C;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #2D6A4F;
+
+  --sidebar: #1A2B3C;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #2D6A4F;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #243A50;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #243A50;
+  --sidebar-ring: #2D6A4F;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--color-forest);
+    font-weight: 600;
+  }
+  .container-cp {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--color-forest); color: #fff;
+    padding: 0.75rem 1.25rem; border-radius: 8px;
+    font-weight: 500; font-size: 0.9375rem;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover { background: var(--color-forest-hover); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: #fff; color: var(--color-forest);
+    padding: 0.75rem 1.25rem; border-radius: 8px;
+    border: 1px solid var(--color-forest);
+    font-weight: 500; font-size: 0.9375rem;
+    transition: background 0.15s ease;
+  }
+  .btn-secondary:hover { background: var(--color-forest-tint); }
+  .card-cp {
+    background: #fff; border: 1px solid #E5E7EB;
+    border-radius: 12px; padding: 1.75rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card-cp:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.07); transform: translateY(-2px); }
+}
