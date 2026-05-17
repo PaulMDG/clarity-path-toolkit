@@ -17,7 +17,9 @@ export const Route = createFileRoute("/book-consultation")({
   head: () => ({ meta: [{ title: "Book a Consultation | ClarityPath" }] }),
   validateSearch: (s: Record<string, unknown>) => ({
     success: s.success === "true" || s.success === true,
+    canceled: s.canceled === "true" || s.canceled === true,
     session_id: typeof s.session_id === "string" ? s.session_id : undefined,
+    booking_id: typeof s.booking_id === "string" ? s.booking_id : undefined,
   }),
 });
 
