@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import heroImage from "@/assets/samuel-beckett-bridge.jpeg";
+import heroImage from "@/assets/Samuel-Beckett-bridge.jpeg";
 
 export function PageHero({
   eyebrow,
