@@ -38,9 +38,9 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-colors ${
-        scrolled ? "bg-white/85 backdrop-blur" : "bg-white"
-      }`}
+      className={`sticky top-0 z-50 transition-colors ${
+          scrolled ? "bg-white/85 backdrop-blur" : "bg-white"
+        }`}
       style={{ borderColor: "#E5E7EB" }}
     >
       <div className="container-cp flex h-[72px] items-center justify-between">
