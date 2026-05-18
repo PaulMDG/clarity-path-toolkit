@@ -75,7 +75,7 @@ export function HeroSection({ content }: { content?: HomepageContent["hero"] }) 
               {c.secondary_cta} →
             </Link>
           </div>
-
+ 
           <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-3 md:grid-cols-4">
             {c.trust_indicators?.map((t) => (
               <div
