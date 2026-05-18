@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import clarityLogo from "@/assets/claritypath-logo.png";
+import clarityLogo from "@/assets/ClarityPath_logo.png";
 
 export function Logo({ light = false }: { light?: boolean }) {
   return (
