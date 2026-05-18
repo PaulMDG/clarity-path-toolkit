@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import heroImg from "@/assets/Samuel-Beckett-bridge.jpeg";
+import heroImg from "@/assets/Samuel-Beckett-bridge.jpg";
 import { Icon } from "@/lib/icons";
 import type { HomepageContent } from "@/hooks/useSiteSettings";
 
