@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import heroImg from "@/assets/hero-dublin.jpg";
+import heroImg from "@/assets/Samuel-Beckett-bridge.jpeg";
 import { Icon } from "@/lib/icons";
 import type { HomepageContent } from "@/hooks/useSiteSettings";
 
@@ -66,8 +66,7 @@ export function HeroSection({ content }: { content?: HomepageContent["hero"] }) 
           <div
             className="pointer-events-none absolute inset-0 hidden lg:block"
             style={{
-              background:
-                "linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0.8) 18%, transparent 45%)",
+              background: "linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0.8) 18%, transparent 45%)",
             }}
           />
         </div>
