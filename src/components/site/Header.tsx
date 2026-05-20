@@ -103,7 +103,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-white lg:hidden">
+        <div className="fixed inset-0 z-[100] lg:hidden" style={{ backgroundColor: "#FFFFFF" }}>
           <div className="container-cp flex h-[72px] items-center justify-between border-b" style={{ borderColor: "#E5E7EB" }}>
             <Logo />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
