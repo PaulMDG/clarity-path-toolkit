@@ -23,33 +23,38 @@ const defaults: NonNullable<HomepageContent["hero"]> = {
 export function HeroSection({ content }: { content?: HomepageContent["hero"] }) {
   const c = { ...defaults, ...(content ?? {}) };
   return (
-  <section className="relative -mt-px min-h-[calc(100vh-72px)] overflow-hidden bg-white">
-    <div className="relative min-h-[calc(100vh-72px)]">
-      {/* Right full-screen image */}
-      <div className="absolute inset-y-0 right-0 w-full lg:w-[62%]">
-        <img
-          src={heroImg}
-          alt="Samuel Beckett Bridge, Dublin"
-          className="h-full w-full object-cover"
-          width={1280}
-          height={1024}
-        />
+    <section className="relative -mt-px min-h-[calc(100vh-72px)] overflow-hidden bg-white">
+      {/* Full-bleed background image */}
+      <img
+        src={heroImg}
+        alt="Samuel Beckett Bridge, Dublin"
+        className="absolute inset-0 h-full w-full object-cover"
+        width={1920}
+        height={1080}
+      />
 
-        <div
-          className="pointer-events-none absolute inset-0 hidden lg:block"
-          style={{
-            background:
-              "linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0.92) 18%, rgba(255,255,255,0.55) 34%, transparent 58%)",
-          }}
-        />
-      </div>
+      {/* Gradient overlay: stronger on left for text legibility, fades to image on right */}
+      <div
+        className="pointer-events-none absolute inset-0 lg:hidden"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.82) 55%, rgba(255,255,255,0.55) 100%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 hidden lg:block"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.9) 30%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.1) 70%, transparent 90%)",
+        }}
+      />
 
-      {/* Left content */}
+      {/* Content */}
       <div className="container-cp relative z-10 flex min-h-[calc(100vh-72px)] items-center">
         <div className="max-w-[660px] py-12 md:py-16">
           <span className="eyebrow">{c.eyebrow}</span>
 
-          <h1 className="mt-5 font-serif text-[42px] leading-[1.05] tracking-tight md:text-[60px] lg:text-[72px]">
+          <h1 className="mt-5 font-serif text-[42px] leading-[1.05] tracking-tight text-[#1A2B3C] md:text-[60px] lg:text-[72px]">
             {c.headline_pre}{" "}
             <em
               className="not-italic"
@@ -62,7 +67,7 @@ export function HeroSection({ content }: { content?: HomepageContent["hero"] }) 
 
           <p
             className="mt-6 max-w-xl text-[17px] leading-relaxed"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#374151" }}
           >
             {c.subheading}
           </p>
@@ -75,7 +80,7 @@ export function HeroSection({ content }: { content?: HomepageContent["hero"] }) 
               {c.secondary_cta} →
             </Link>
           </div>
- 
+
           <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-3 md:grid-cols-4">
             {c.trust_indicators?.map((t) => (
               <div
@@ -90,6 +95,6 @@ export function HeroSection({ content }: { content?: HomepageContent["hero"] }) 
           </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+}
